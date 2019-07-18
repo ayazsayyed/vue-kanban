@@ -1,0 +1,208 @@
+html, body {
+    height: 100%;
+}
+
+p {
+    margin: 0;
+}
+
+ul, li {
+    list-style: none;
+    padding: 0;
+}
+
+.main-container {
+    padding: 30px;
+    background: #eef2f9;
+}
+
+.navbar {
+    padding: 0 30px;
+}
+.search-task{}
+.search-task{
+    width: 30%;
+    background: none;
+    border: none;
+    color: #fff;
+}
+.search-task:focus{background: none;color: #fff}
+.search-task.form-control::-webkit-input-placeholder { color: white; }
+.bg-gradient-primary-custom {
+    background: linear-gradient(89deg, #98a8fb 0, #71b3f8 100%)!important
+}
+
+.board-wrapper {
+    display: flex;
+    align-items: flex-start;
+}
+
+.board-wrapper .task-board {
+    background: #f6f8fc;
+    height: auto;
+    margin: 15px;
+    padding: 15px;
+    width: 335px;
+    position: relative;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 0px 4px 0px rgba(134, 134, 162, 0.21);
+    -moz-box-shadow: 0px 0px 4px 0px rgba(134, 134, 162, 0.21);
+    box-shadow: 0px 0px 4px 0px rgba(134, 134, 162, 0.21);
+}
+
+.task-board:before {
+    content: '';
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(89deg, #c875e8 0, #dd6883 100%);
+    position: absolute;
+    margin-left: -15px;
+    border-radius: 5px;
+    top: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.task-board.todo-board:before {
+    background: linear-gradient(89deg, #c875e8 0, #dd6883 100%);
+}
+
+.task-board.inprogress-board:before {
+    background: linear-gradient(89deg, #feb143 0, #fe9279 100%);
+}
+
+.task-board.review-board:before {
+    background: linear-gradient(89deg, #8a92cc 0, #66aef7 100%);
+}
+
+.task-board.done-board:before {
+    background: linear-gradient(89deg, #75d2a8 0, #78d2ea 100%);
+}
+
+.task-board[data-board-name="Todo"]:before {
+    background: linear-gradient(89deg, #c875e8 0, #dd6883 100%);
+}
+
+.task-board[data-board-name="In Progress"]:before {
+    background: linear-gradient(89deg, #feb143 0, #fe9279 100%);
+}
+
+.task-board[data-board-name="Review"]:before {
+    background: linear-gradient(89deg, #8a92cc 0, #66aef7 100%);
+}
+
+.task-board[data-board-name="Done"]:before {
+    background: linear-gradient(89deg, #75d2a8 0, #78d2ea 100%);
+}
+
+.board-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.board-header .board-name {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.task-item {
+    background: #fff;
+    padding: 12px;
+    border-radius: 5px;
+    margin-bottom: 18px;
+    -webkit-box-shadow: 0px 0px 4px 0px rgba(134, 134, 162, 0.21);
+    -moz-box-shadow: 0px 0px 4px 0px rgba(134, 134, 162, 0.21);
+    box-shadow: 0px 0px 4px 0px rgba(134, 134, 162, 0.21);
+}
+
+.task-item-header {
+    margin-bottom: 12px;
+}
+
+.task-item-header .task-priority {
+    display: inline;
+    color: #fff;
+    font-size: 13px;
+    padding: 3px 18px;
+    border-radius: 3px;
+    font-weight: 600;
+    -webkit-box-shadow: 0px 0px 5px -2px rgba(134, 134, 162, 1);
+    -moz-box-shadow: 0px 0px 5px -2px rgba(134, 134, 162, 1);
+    box-shadow: 0px 0px 5px -2px rgba(134, 134, 162, 1);
+}
+
+.task-priority.Low {
+    background: linear-gradient(89deg, #66a7f8 0, #8ea7fb 100%);
+}
+
+.task-priority.Medium {
+    background: linear-gradient(89deg, #79d3b9 0, #81d5de 100%);
+}
+
+.task-priority.High {
+    background: linear-gradient(89deg, #cd74d1 0, #db78a3 100%);
+}
+
+.task-item-body {
+    margin-bottom: 25px;
+}
+
+.task-item-body .task-title {
+    color: #8686a2;
+    font-weight: 500;
+}
+
+.task-item-footer, .assigned-users, .comments-attachments {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.comments-attachments {
+    color: #8686a2;
+    font-size: 12px;
+}
+
+.comments-attachments i {
+    font-size: 12px;
+    margin-right: 5px;
+}
+
+.comments {
+    margin-right: 15px;
+}
+
+.user-avatar img {
+    border-radius: 50%;
+    width: 30px;
+}
+
+.assigned-users .add-icon {
+    height: 30px;
+    width: 30px;
+    background: transparent;
+    border: 1px solid #8686a2;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    font-weight: 300;
+    margin-right: 10px;
+    color: #8686a2;
+}
+
+.board-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+}
+
+.board-footer .add-task-btn {
+    color: #8686a2;
+}
+
+.board-footer .add-task-btn span {}
