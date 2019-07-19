@@ -18,4 +18,7 @@ export default {
         console.log(payload)
         commit("ADD_TASK_TO_BOARD", payload)
     },
+    async reorderTaskLists({ commit }, payload) {
+        commit("REORDER_TASKLISTS", payload)
+      },
 }

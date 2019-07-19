@@ -3,6 +3,7 @@ export default {
   activeBoard: null,
   boards: [
     {
+      id: "d033c156-5972-4767-ceb0-8a91a5c282db",
       title:'Todo',
       tasks:[
         {
@@ -62,6 +63,7 @@ export default {
       ]
     },
     {
+      id: "d033c156-5972-4767-ceb0-8a91a5c28asdasd",
       title:'In Progress',
       tasks:[
         {
@@ -121,6 +123,7 @@ export default {
       ]
     },
     {
+      id: "d033c156-5972-4767-ceb0-8a91a5c282asccdb",
       title:'Review',
       tasks:[
         {
@@ -180,6 +183,7 @@ export default {
       ]
     },
     {
+      id: "d033c156-5972-4767-ceb0-8asasdas91a5c282db",
       title:'Done',
       tasks:[
         {

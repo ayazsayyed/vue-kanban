@@ -1,6 +1,6 @@
 <template>
   <div>
-    <li class="task-item" v-for="(task, key) in fetchTasks(index)" :key="key">
+    <li class="task-item" >
       <div class="task-item-header">
         <div class="task-priority" :class="task.priority">{{task.priority}} Priority</div>
       </div>
@@ -38,13 +38,12 @@ import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "Taskitem",
-  props: ['index'],
+  props: ['index', 'task'],
   created(){
-      console.log('index', this.fetchTasks(this.index));
+      console.log('task', this.task);
       
   },
   computed: {
-    ...mapGetters(["fetchTasks"])
   },
 };
 </script>
