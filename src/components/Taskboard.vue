@@ -1,24 +1,16 @@
 <template>
   <div>
-    <div
-      class="task-board" :data-board-name="board.title"
-    >
-      <div class="board-header">
-        <p class="board-name">{{board.title}}</p>
-        <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-      </div>
-      <div class="board-content">
-        <ul class="task-list">
-          <draggable v-model="lists" >
-              <Taskitem v-for="(task, key) in lists" :task="task" :key="key" :index="key" />
-          </draggable>
-        </ul>
-      </div>
-      <div class="board-footer">
-        <a href="#" class="add-task-btn" @click="createNewTask(0)">
-          Add task
-          <span>+</span>
-        </a>
+    <Navbar />
+    <div class="container-fluid main-container">
+      <div class="board-wrapper">
+        <draggable v-model="lists" class="row flex-nowrap mt-1 scrollable-div" v-bind="getDragOptions">
+          <TaskList
+            v-for="(listItem, index) in lists"
+            :key="index"
+            :board="getBoard"
+            :list="listItem"
+          ></TaskList>
+        </draggable>
       </div>
     </div>
   </div>
@@ -26,42 +18,70 @@
 
 <script>
 import Taskitem from "./Taskitem";
-import store from "./store/index";
+import Navbar from "./Navbar";
+import TaskList from "./Tasklist";
+import store from "./../store/index";
 import draggable from "vuedraggable";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "Taskboard",
-  props:['board'],
+  props: ["board"],
   components: {
     Taskitem,
-    draggable
+    TaskList,
+    draggable,
+    Navbar
   },
   data() {
     return {};
   },
   created() {
-    console.log("this.boards ", this.board);
+    console.log("this.boards ", this.param);
   },
   computed: {
-    ...mapGetters(["fetchTasks"]),
-     lists: {
+    ...mapGetters({
+      boards: "allBoards",
+      isLoading: "isLoading"
+    }),
+    getDragOptions() {
+      return {
+        animation: "200",
+        ghostClass: "ghost",
+        handle: ".board-header",
+        // disabled: !this.shouldAllowListOrder,
+        group: "kanban-board-lists"
+      };
+    },
+    param() {
+      return this.$route.params.id;
+    },
+    shouldAllowListOrder() {
+      return this.isDesktop || this.isTablet;
+    },
+    getBoard() {
+      return this.boards.find(b => b.id == this.param);
+    },
+    lists: {
       get() {
-        return this.fetchTasks(1)
+        return this.getBoard
+          ? this.getBoard.lists.filter(l => !l.archived)
+          : [];
       },
       async set(value) {
-        console.log('value ', value);
-        
         await this.reorderTaskLists({
-          boardId: 1,
+          boardId: this.param,
           lists: value
-        })
+        });
       }
     }
-    // ...mapGetters([""])
   },
   methods: {
-    ...mapActions(["addTaskToBoard", "reorderTaskLists"]),
+    // ...mapActions(["addTaskToBoard", "reorderTaskLists"]),
+    ...mapActions({
+      reorderTaskLists: "reorderTaskLists",
+      setActiveTaskBoard: "setActiveTaskBoard"
+    }),
     createNewTask(key) {
       let newTask = {
         title: "",

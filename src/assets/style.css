@@ -204,5 +204,8 @@ ul, li {
 .board-footer .add-task-btn {
     color: #8686a2;
 }
-
+.scrollable-div{
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
 .board-footer .add-task-btn span {}

@@ -6,9 +6,13 @@
 
 <script>
 import Dashboard from './components/Dashboard.vue'
+import { mapGetters } from "vuex"
 export default {
   name: 'app',components: {
     Dashboard,
+  },
+  beforeCreate() {
+    this.$store.dispatch("fetchData")
   },
   data () {
     return {

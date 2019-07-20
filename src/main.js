@@ -1,20 +1,11 @@
 import Vue from 'vue'
 import App from './App.vue'
-import VueRouter from 'vue-router'
-import store from './components/store/index'
+import store from './store/index'
+import router from "./router"
 
 import Dashboard from './components/dashboard.vue'
 
-Vue.use(VueRouter);
 
-const routes = [
-  { path:  '/', component: Dashboard },
-];
-
-const router = new VueRouter({
-  routes,
-  mode:'history'
-})
 
 new Vue({
   el: '#app',

@@ -2,10 +2,10 @@
   <div>
     <li class="task-item" >
       <div class="task-item-header">
-        <div class="task-priority" :class="task.priority">{{task.priority}} Priority</div>
+        <div class="task-priority High" >High Priority</div>
       </div>
       <div class="task-item-body">
-          <p class="task-title">{{task.title}}</p>
+          <p class="task-title">{{this.item.text}}</p>
           <!-- <textarea type="text" class="form-control task-title" :value="task.title" rows="2"></textarea> -->
       </div>
       <div class="task-item-footer">
@@ -32,13 +32,13 @@
 </template>
 
 <script>
-import store from "./store/index";
+import store from "./../store/index";
 import { mapActions, mapGetters } from "vuex";
 
 
 export default {
   name: "Taskitem",
-  props: ['index', 'task'],
+  props: ["item", "list", "board"],
   created(){
       console.log('task', this.task);
       
