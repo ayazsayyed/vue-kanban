@@ -13,13 +13,13 @@ ul, li {
 
 .main-container {
     padding: 30px;
+    padding-bottom: 0;
     background: #eef2f9;
 }
 
 .navbar {
     padding: 0 30px;
 }
-.search-task{}
 .search-task{
     width: 30%;
     background: none;
@@ -208,4 +208,3 @@ ul, li {
     overflow-x: scroll;
     overflow-y: hidden;
 }
-.board-footer .add-task-btn span {}

@@ -4,6 +4,7 @@
     <div class="container-fluid main-container">
       <div class="row equal">
       <div class="col-xs-12 col-sm-6 col-md-3 d-flex pb-3" v-for="board in unarchivedBoards" :key="board.id">
+        <router-link :to="{ name: 'task-board', params: { id: board.id } }" >
         <div class="card w-100 board-item">
           <div class="card-body">
             <div class="d-flex justify-content-between">
@@ -12,15 +13,16 @@
             </div>
             <p class="card-text">{{ board.description }}</p>
           </div>
-          <div class="card-footer bg-transparent">
+          <!-- <div class="card-footer bg-transparent">
             <router-link class="btn btn-sm btn-app mr-2 mb-1" :to="{ name: 'task-board', params: { id: board.id } }"
               >View</router-link
             >
             <button class="btn btn-sm btn-danger mb-1" @click="handleArchiveTaskBoard(board)">
               Archive
             </button>
-          </div>
+          </div> -->
         </div>
+        </router-link>
       </div>
     </div>
     

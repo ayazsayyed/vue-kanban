@@ -1,4 +1,5 @@
 import Vue from "vue"
+const uuidv1 = require('uuid/v1');
 
 // Lib to create guid
 const s4 = () =>
@@ -32,7 +33,7 @@ export default {
     // For new item
     else {
       const board = {
-        id: guid(),
+        id: uuidv1(),
         name: payload.name,
         description: payload.description,
         archived: false,

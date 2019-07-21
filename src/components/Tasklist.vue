@@ -101,9 +101,7 @@ export default {
 </script>
 
 <style>
-.ghost .task-item{
-  /* background: red; */
-}
+
 .sortable-chosen.ghost .task-item{
   background: repeating-linear-gradient(
     145deg,
