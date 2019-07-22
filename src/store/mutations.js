@@ -1,5 +1,7 @@
 import Vue from "vue"
 const uuidv1 = require('uuid/v1');
+import {Bus} from './../utils/bus';
+import moment from "moment";
 
 // Lib to create guid
 const s4 = () =>
@@ -36,10 +38,12 @@ export default {
         id: uuidv1(),
         name: payload.name,
         description: payload.description,
+        createdAt: moment().format("DD MM YY"),
         archived: false,
         lists: []
       }
       state.boards.push(board)
+      Bus.$emit('closePopup')
     }
   },
 

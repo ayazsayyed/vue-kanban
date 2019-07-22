@@ -1,51 +1,56 @@
 <template>
-  <div>
+  <div class="main-wrapper">
     <Navbar />
     <div class="container-fluid main-container">
       <div class="row equal">
-      <div class="col-xs-12 col-sm-6 col-md-3 d-flex pb-3" v-for="board in unarchivedBoards" :key="board.id">
-        <router-link :to="{ name: 'task-board', params: { id: board.id } }" >
-        <div class="card w-100 board-item">
-          <div class="card-body">
-            <div class="d-flex justify-content-between">
-              <h5 class="card-title flex-nowrap">{{ board.name }}</h5>
-              <span @click="handleTaskBoardEditing(board)">...</span>
+        <div
+          class="col-xs-12 col-sm-6 col-md-3 d-flex pb-3"
+          v-for="board in unarchivedBoards"
+          :key="board.id"
+        >
+          <router-link class="project-card" :to="{ name: 'task-board', params: { id: board.id } }">
+            <div class="card w-100 h-100 board-item shadow-sm--hover shadow-sm">
+              <div class="card-body">
+                <div class="d-flex justify-content-between">
+                  <h5 class="card-title flex-nowrap">{{ board.name }}</h5>
+                  <span @click="handleTaskBoardEditing(board)">...</span>
+                </div>
+                <p class="card-text text-truncate">{{ board.description }}</p>
+              </div>
+              <div class="card-footer bg-transparent">
+                <div class="details-wrapper">
+                  <div class="board-info">
+                    <p class="card-text">Lists : 5 | Items : 22</p>
+                  </div>
+                  <div class="date">
+                    <p class="text-muted">22 July 2019</p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <p class="card-text">{{ board.description }}</p>
-          </div>
-          <!-- <div class="card-footer bg-transparent">
-            <router-link class="btn btn-sm btn-app mr-2 mb-1" :to="{ name: 'task-board', params: { id: board.id } }"
-              >View</router-link
-            >
-            <button class="btn btn-sm btn-danger mb-1" @click="handleArchiveTaskBoard(board)">
-              Archive
-            </button>
-          </div> -->
+          </router-link>
         </div>
-        </router-link>
       </div>
-    </div>
-    
+
       <div class="row">
         <div class="col-md-12">
-          <div >
+          <div>
             <!-- <draggable class="board-wrapper" >
               <Taskboard  v-for="(board, key) in fetchBoards" :board="board" :key="key" />
-            </draggable> -->
+            </draggable>-->
           </div>
         </div>
       </div>
     </div>
-    
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex"
-import { Bus } from "./../utils/bus"
-import Navbar from './Navbar'
+import { mapGetters, mapActions } from "vuex";
+import { Bus } from "./../utils/bus";
+import Navbar from "./Navbar";
 export default {
-  components:{
+  components: {
     Navbar
   },
   computed: {
@@ -61,24 +66,36 @@ export default {
       restoreTaskBoard: "restoreTaskBoard"
     }),
     handleTaskBoardEditing(board) {
-      Bus.$emit("taskboard-editing", board)
+      Bus.$emit("taskboard-editing", board);
     },
     handleArchiveTaskBoard(board) {
-      this.archiveTaskBoard({ boardId: board.id })
+      this.archiveTaskBoard({ boardId: board.id });
     },
     handleRestoreTaskBoard(board) {
-      this.restoreTaskBoard({ boardId: board.id })
+      this.restoreTaskBoard({ boardId: board.id });
     }
   },
   async created() {
-    
-    
     await this.setActiveTaskBoard({
       board: null
-    })
+    });
   }
-}
+};
 </script>
 
-<style>
+<style lang="scss" scoped>
+.project-card {
+  display: block;
+  width: 100%;
+}
+.details-wrapper {
+  display: flex;
+  justify-content: space-between;
+  .board-info p,
+  .date p{
+    font-size: 13px;
+  }
+}
 </style>
+
+

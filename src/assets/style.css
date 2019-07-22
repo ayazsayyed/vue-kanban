@@ -1,7 +1,9 @@
 html, body {
     height: 100%;
 }
-
+#app, .main-wrapper{
+    height: 100%
+}
 p {
     margin: 0;
 }
@@ -15,11 +17,10 @@ ul, li {
     padding: 30px;
     padding-bottom: 0;
     background: #eef2f9;
+    height: 100%;
 }
 
-.navbar {
-    padding: 0 30px;
-}
+
 .search-task{
     width: 30%;
     background: none;
@@ -207,4 +208,8 @@ ul, li {
 .scrollable-div{
     overflow-x: scroll;
     overflow-y: hidden;
+}
+.card-text{
+    color: #525f7f;
+    font-weight: 400;
 }

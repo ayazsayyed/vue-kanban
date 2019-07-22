@@ -25,33 +25,43 @@
             <li class="nav-item">
               <a class="nav-link" href="#">Profile</a>
             </li>
-            <div class="dropdown">
-              <button
-                class="btn btn-secondary dropdown-toggle"
-                type="button"
-                id="dropdownMenuButton"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >Regular</button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-            </div>
+            <li class="nav-item add-board-link">
+              <button class="btn btn-icon btn-3 btn-secondary" type="button" @click="addNewBoard">
+                <span class="btn-inner--icon">
+                  <i class="fa fa-plus" aria-hidden="true"></i>
+                </span>
+
+                <span class="btn-inner--text">New Board</span>
+              </button>
+            </li>
           </ul>
         </div>
       </div>
     </nav>
+    <NewBoardPopup />
   </div>
 </template>
 
 <script>
+import { Bus } from "./../utils/bus";
+import NewBoardPopup from "./popups/NewBoardPopup";
 export default {
-  name: "Navbar"
+  name: "Navbar",
+  components: {
+    NewBoardPopup
+  },
+  methods: {
+    addNewBoard(e) {
+      e.preventDefault();
+      Bus.$emit("open-new-popup");
+    }
+  }
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+.add-board-link {
+  display: flex;
+  align-items: center;
+}
 </style>

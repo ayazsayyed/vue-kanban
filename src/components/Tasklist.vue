@@ -9,13 +9,13 @@
         <ul class="task-list">
           <draggable v-model="items" v-bind="dragOptions" class="list-group">
             <transition-group type="transition" :name="!drag ? 'flip-list' : null">
-            <Taskitem
-              v-for="item in items"
+              <Taskitem
+                v-for="item in items"
                 :item="item"
                 :list="list"
                 :board="board"
                 :key="item.id"
-            />
+              />
             </transition-group>
           </draggable>
         </ul>
@@ -32,8 +32,8 @@
 
 <script>
 import draggable from "vuedraggable";
-import Taskitem from "./Taskitem"
-import { mapActions } from "vuex"
+import Taskitem from "./Taskitem";
+import { mapActions } from "vuex";
 export default {
   components: {
     Taskitem,
@@ -44,43 +44,42 @@ export default {
     return {
       isEditing: false,
       drag: false
-    }
+    };
   },
-  created(){
-      console.log('list ', this.list);
-      console.log('board ', this.board);
-      
+  created() {
+    console.log("list ", this.list);
+    console.log("board ", this.board);
   },
   computed: {
     defaultItem() {
       return {
         id: "",
         text: ""
-      }
+      };
     },
     dragOptions() {
       return {
         animation: "200",
         ghostClass: "ghost",
-        group: "kanban-board-list-items",
+        group: "kanban-board-list-items"
         // disabled: this.isEditing || !this.shouldAllowTaskItemsReorder
-      }
+      };
     },
     items: {
       get() {
-        return this.list.items
+        return this.list.items;
       },
       set(reorderedListItems) {
         const payload = {
           boardId: this.board.id,
           listId: this.list.id,
           items: reorderedListItems
-        }
-        this.reorderTaskListItems(payload)
+        };
+        this.reorderTaskListItems(payload);
       }
     },
     shouldAllowTaskItemsReorder() {
-      return this.isDesktop || this.isTablet
+      return this.isDesktop || this.isTablet;
     }
   },
   methods: {
@@ -88,33 +87,32 @@ export default {
       reorderTaskListItems: "reorderTaskListItems"
     }),
     itemEditing() {
-      this.isEditing = true
+      this.isEditing = true;
     },
     itemEdited() {
-      this.isEditing = false
+      this.isEditing = false;
     },
     itemCancelled() {
-      this.isEditing = false
+      this.isEditing = false;
     }
   }
-}
+};
 </script>
 
 <style>
-
-.sortable-chosen.ghost .task-item{
+.sortable-chosen.ghost .task-item {
   background: repeating-linear-gradient(
     145deg,
     transparent,
     transparent 5px,
     #e8eaf1 5px,
     #e8eaf1 10px
-  )
+  );
+  border: 2px solid#e2e2e2;
 }
 
-
 .flip-list-move {
-  transition: transform 0.5s;
+  transition: transform 0.2s;
 }
 .no-move {
   transition: transform 0s;
