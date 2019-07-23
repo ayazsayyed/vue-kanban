@@ -1,9 +1,21 @@
 <template>
   <div>
-    <Navbar />
+    <Navbar :btnType="getBoard" />
     <div class="container-fluid main-container">
       <div class="board-wrapper">
-        <draggable v-model="lists" class="row flex-nowrap mt-1 scrollable-div" v-bind="getDragOptions">
+        <div class="board-details">
+          <div class="project-name mb-2">
+            <!-- <h3 v-if="showName">{{getBoardName}}</h3> -->
+            <input type="text" :value="getBoardName" class="project-name-input form-control" @blur="editProjectName">
+          </div>
+          <!-- <p class="project-description">{{projectDescription}}</p> -->
+          <input type="text" :value="projectDescription" class="project-desc-input form-control" @blur="editProjectDescription">
+        </div>
+        <draggable
+          v-model="lists"
+          class="row flex-nowrap mt-1 scrollable-div"
+          v-bind="getDragOptions"
+        >
           <TaskList
             v-for="(listItem, index) in lists"
             :key="index"
@@ -34,25 +46,40 @@ export default {
     Navbar
   },
   data() {
-    return {};
+    return {
+      projectName: "",
+      projectDescription: "",
+      currentBoard:''
+    };
   },
   created() {
-    console.log("this.boards ", this.param);
+    // console.log("this.getBoard ", this.getBoard);
   },
   computed: {
     ...mapGetters({
       boards: "allBoards",
       isLoading: "isLoading"
     }),
+    getBoardName() {
+      let that = this;
+      this.boards.find(function(b) {
+        if (b.id == that.param) {
+          that.currentBoard = b
+          that.projectName = b.name;
+          that.projectDescription = b.description;
+        }
+      });
+      return this.projectName;
+    },
     getDragOptions() {
       return {
         animation: "200",
         ghostClass: "ghost",
         handle: ".board-header",
-        // disabled: !this.shouldAllowListOrder,
         group: "kanban-board-lists"
       };
     },
+
     param() {
       return this.$route.params.id;
     },
@@ -80,8 +107,17 @@ export default {
     // ...mapActions(["addTaskToBoard", "reorderTaskLists"]),
     ...mapActions({
       reorderTaskLists: "reorderTaskLists",
-      setActiveTaskBoard: "setActiveTaskBoard"
+      setActiveTaskBoard: "setActiveTaskBoard",
+      saveTaskBoard:"saveTaskBoard"
     }),
+    editProjectName(e){
+      this.currentBoard.name = e.target.value.trim()
+      this.saveTaskBoard(this.currentBoard)
+    },
+    editProjectDescription(e){
+      this.currentBoard.description = e.target.value.trim()
+      this.saveTaskBoard(this.currentBoard)
+    },
     createNewTask(key) {
       let newTask = {
         title: "",
@@ -96,5 +132,43 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+.board-details {
+  .project-name {
+    display: flex;
+    // justify-content: center;
+    align-items: center;
+    
+    &:hover {
+      .name-edit-icon {
+        display: block;
+      }
+    }
+  }
+  .name-edit-icon {
+    display: none;
+    width: 50px;
+    text-align: center;
+    cursor: pointer;
+  }
+  .project-name-input, .project-desc-input{
+    padding: 0;
+    font-size: 24px;
+    color: #525f7f;
+    border: 1px solid transparent;
+    background: transparent;
+    width: 50%;
+    padding-left: 10px;
+    &:hover{
+      border: 1px solid #cad1d7;
+    }
+    &:focus{
+      border: 1px solid #98a8fb ;
+    }
+  }
+  .project-desc-input{
+    font-size: 15px;
+    height: 30px;
+  }
+}
 </style>

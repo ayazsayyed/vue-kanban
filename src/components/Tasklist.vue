@@ -47,8 +47,6 @@ export default {
     };
   },
   created() {
-    console.log("list ", this.list);
-    console.log("board ", this.board);
   },
   computed: {
     defaultItem() {

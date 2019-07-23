@@ -20,7 +20,9 @@
               <div class="card-footer bg-transparent">
                 <div class="details-wrapper">
                   <div class="board-info">
-                    <p class="card-text">Lists : 5 | Items : 22</p>
+                    <p
+                      class="card-text"
+                    >Lists : {{board.lists.length}} | Items : {{totalItems(board.lists)}}</p>
                   </div>
                   <div class="date">
                     <p class="text-muted">22 July 2019</p>
@@ -65,6 +67,13 @@ export default {
       archiveTaskBoard: "archiveTaskBoard",
       restoreTaskBoard: "restoreTaskBoard"
     }),
+    totalItems(lists) {
+      let count = 0;
+      lists.forEach(element => {
+        count += element.items.length;
+      });
+      return count;
+    },
     handleTaskBoardEditing(board) {
       Bus.$emit("taskboard-editing", board);
     },
@@ -92,7 +101,7 @@ export default {
   display: flex;
   justify-content: space-between;
   .board-info p,
-  .date p{
+  .date p {
     font-size: 13px;
   }
 }

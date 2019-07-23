@@ -50,6 +50,9 @@ export default {
   components: {
     NewBoardPopup
   },
+  mounted(){
+    
+  },
   methods: {
     addNewBoard(e) {
       e.preventDefault();
