@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Navbar :btnType="getBoard" />
+    <Navbar buttonType="taskboard"  />
     <div class="container-fluid main-container">
       <div class="board-wrapper">
         <div class="board-details">

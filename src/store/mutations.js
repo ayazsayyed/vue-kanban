@@ -23,6 +23,8 @@ export default {
 
   // Save Task Board
   SAVE_TASKBOARD(state, payload) {
+    console.log('payload ', payload);
+    
     const board = state.boards.find(b => b.id == payload.id)
     const itemIdx = state.boards.findIndex(b => b.id == payload.id)
 
@@ -65,7 +67,9 @@ export default {
 
   // Save Task List
   SAVE_TASKLIST(state, payload) {
+    console.log('payload SAVE_TASKLIST', payload);
     const board = state.boards.find(b => b.id == payload.boardId)
+    console.log('board ', board);
     const list = board.lists.find(l => l.id == payload.listId)
     const listIdx = board.lists.findIndex(l => l.id == payload.listId)
 
@@ -77,7 +81,7 @@ export default {
     // // For new item
     else {
       const list = {
-        id: guid(),
+        id: uuidv1(),
         name: payload.name,
         headerColor: "#607d8b",
         archived: false,

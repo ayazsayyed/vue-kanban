@@ -1,6 +1,6 @@
 <template>
   <div class="main-wrapper">
-    <Navbar />
+    <Navbar buttonType="dashboard" />
     <div class="container-fluid main-container">
       <div class="row equal">
         <div
@@ -13,7 +13,6 @@
               <div class="card-body">
                 <div class="d-flex justify-content-between">
                   <h5 class="card-title flex-nowrap">{{ board.name }}</h5>
-                  <span @click="handleTaskBoardEditing(board)">...</span>
                 </div>
                 <p class="card-text text-truncate">{{ board.description }}</p>
               </div>
@@ -73,9 +72,6 @@ export default {
         count += element.items.length;
       });
       return count;
-    },
-    handleTaskBoardEditing(board) {
-      Bus.$emit("taskboard-editing", board);
     },
     handleArchiveTaskBoard(board) {
       this.archiveTaskBoard({ boardId: board.id });

@@ -11,9 +11,12 @@
     >
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-          <form @submit.prevent="createNewBoard">
+          <form @submit.prevent="formType == 'board' ? createNewBoard() : createNewList()">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Create Board</h5>
+              <h5
+                class="modal-title"
+                id="exampleModalLabel"
+              >Create {{formType == 'board' ? 'board' : 'List' }}</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -26,11 +29,11 @@
                       type="text"
                       v-model="newBoard.name"
                       class="form-control"
-                      placeholder="Project Name"
+                      :placeholder="formType == 'board' ? 'Board Name' : 'List Name' "
                     />
                   </div>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-12" v-if="formType == 'board'">
                   <div class="form-group">
                     <textarea
                       v-model="newBoard.description"
@@ -64,7 +67,8 @@ export default {
         name: "",
         description: "",
         id: ""
-      }
+      },
+      formType: ""
     };
   },
   created() {
@@ -72,8 +76,13 @@ export default {
     Bus.$on("closePopup", this.closePopup);
   },
   methods: {
-    ...mapActions({ saveTaskBoard: "saveTaskBoard" }),
-    showCreateNewBoardPopup() {
+    ...mapActions({
+      saveTaskBoard: "saveTaskBoard",
+      saveTaskList: "saveTaskList"
+    }),
+    showCreateNewBoardPopup(type) {
+      console.log("type ", type);
+      this.formType = type;
       this.newBoard.name = "";
       this.newBoard.description = "";
       this.newBoard.id = "";
@@ -81,11 +90,18 @@ export default {
       $("#genericPopup").modal("show");
     },
     createNewBoard() {
-      console.log("form submitt", this.newBoard);
       this.newBoard.id = this.saveTaskBoard({
         id: this.newBoard.id,
         name: this.newBoard.name,
         description: this.newBoard.description
+      });
+    },
+    createNewList() {
+      console.log('hello');
+      
+      this.newBoard.id = this.saveTaskList({
+        boardId: this.newBoard.id,
+        name: this.newBoard.name,
       });
     },
     closePopup() {

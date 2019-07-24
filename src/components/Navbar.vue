@@ -25,13 +25,22 @@
             <li class="nav-item">
               <a class="nav-link" href="#">Profile</a>
             </li>
-            <li class="nav-item add-board-link">
+            <li class="nav-item add-board-link" v-if="buttonType == 'dashboard'" >
               <button class="btn btn-icon btn-3 btn-secondary" type="button" @click="addNewBoard">
                 <span class="btn-inner--icon">
                   <i class="fa fa-plus" aria-hidden="true"></i>
                 </span>
 
                 <span class="btn-inner--text">New Board</span>
+              </button>
+            </li>
+            <li class="nav-item add-board-link" v-if="buttonType == 'taskboard'" >
+              <button class="btn btn-icon btn-3 btn-secondary" type="button" @click="addNewList">
+                <span class="btn-inner--icon">
+                  <i class="fa fa-plus" aria-hidden="true"></i>
+                </span>
+
+                <span class="btn-inner--text">New List</span>
               </button>
             </li>
           </ul>
@@ -50,13 +59,26 @@ export default {
   components: {
     NewBoardPopup
   },
+  props:['buttonType', 'currentBoard'],
   mounted(){
+    console.log('buttonType ', this.buttonType);
     
+  },
+  data(){
+    return{
+      navBtnType: this.buttonType,
+    }
+  },
+  computed:{
   },
   methods: {
     addNewBoard(e) {
       e.preventDefault();
-      Bus.$emit("open-new-popup");
+      Bus.$emit("open-new-popup", "board");
+    },
+    addNewList(e) {
+      e.preventDefault();
+      Bus.$emit("open-new-popup", "list");
     }
   }
 };
