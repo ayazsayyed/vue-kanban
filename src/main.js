@@ -7,6 +7,7 @@ import Dashboard from './components/dashboard.vue'
 
 
 
+
 new Vue({
   el: '#app',
   router,

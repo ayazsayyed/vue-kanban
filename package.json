@@ -11,12 +11,14 @@
   },
   "dependencies": {
     "axios": "^0.19.0",
+    "firebase": "^6.4.2",
     "moment": "^2.24.0",
     "save": "^2.4.0",
     "uuid": "^3.3.2",
     "vue": "^2.5.11",
     "vue-router": "^3.0.7",
     "vuedraggable": "^2.23.0",
+    "vuefire": "^2.1.2",
     "vuex": "^3.1.1"
   },
   "browserslist": [

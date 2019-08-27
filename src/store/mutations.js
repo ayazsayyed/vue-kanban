@@ -128,6 +128,7 @@ export default {
 
   // Save Task List Item
   SAVE_TASKLIST_ITEM(state, payload) {
+    console.log('payload ', payload)
     const board = state.boards.find(b => b.id == payload.boardId)
     const list = board.lists.find(l => l.id == payload.listId)
     const itemIdx = list.items.findIndex(item => item.id == payload.item.id)
@@ -138,6 +139,7 @@ export default {
     }
     // For new item
     else {
+      
       payload.item.id = guid()
       list.items.push(payload.item)
     }

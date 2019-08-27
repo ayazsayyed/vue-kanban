@@ -1,8 +1,13 @@
 // const INITIAL_DATA_URL = "https://raw.githubusercontent.com/techlab23/data-repository/master/boards.json"
 const INITIAL_DATA_URL = "https://raw.githubusercontent.com/ayazsayyed/vue-kanban/master/src/store/data.json"
 import axios from "axios"
+import { db } from './../utils/db'
+
 
 export default {
+  // firebase: {
+  //   // users: usersRef
+  // },
   async fetchData({ commit }) {
     commit("SET_LOADING_STATE", true)
     return axios.get(INITIAL_DATA_URL).then(res => {

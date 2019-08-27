@@ -50,9 +50,27 @@
 import { mapGetters, mapActions } from "vuex";
 import { Bus } from "./../utils/bus";
 import Navbar from "./Navbar";
+import { db } from './../utils/db';
+
+const users = db.ref('vue-asana')
 export default {
   components: {
     Navbar
+  },
+  data(){
+    return{
+      documents: [],
+    }
+  },
+  firebase: {
+    
+    documents: db.ref('vue-asana'),
+    
+
+  },
+  mounted(){
+    console.log('documents ', db.ref('vue-asana'));
+    
   },
   computed: {
     ...mapGetters({

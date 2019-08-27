@@ -215,3 +215,8 @@ ul, li {
     color: #525f7f;
     font-weight: 400;
 }
+
+.task-item-body .task-title:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}

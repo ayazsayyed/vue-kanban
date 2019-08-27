@@ -16,8 +16,10 @@
                 :board="board"
                 :key="item.id"
               />
+              
             </transition-group>
           </draggable>
+          <taskItemTemplate v-if="showTemplate" :list="list" />
         </ul>
       </div>
       <div class="board-footer">
@@ -33,20 +35,25 @@
 <script>
 import draggable from "vuedraggable";
 import Taskitem from "./Taskitem";
+import taskItemTemplate from "./TaskItemTemplate";
+import { Bus } from "./../utils/bus";
 import { mapActions } from "vuex";
 export default {
   components: {
     Taskitem,
-    draggable
+    draggable,
+    taskItemTemplate
   },
   props: ["board", "list"],
   data() {
     return {
       isEditing: false,
-      drag: false
+      drag: false,
+      showTemplate:false
     };
   },
   created() {
+     Bus.$on('remove-template', this.removeTemplate )
   },
   computed: {
     defaultItem() {
@@ -85,14 +92,21 @@ export default {
       reorderTaskListItems: "reorderTaskListItems",
       saveTaskListItem: "saveTaskListItem"
     }),
+    removeTemplate(data){
+      console.log('remove template ', data)
+      this.showTemplate = false;
+    },
     createNewTask(){
-      console.log('list ', this.list)
-      this.saveTaskListItem({
-        boardId: this.$route.params.id,
-        listId:this.list.id,
-        item:{id:5},
-        name:"hello"}
-      )
+      // console.log('list ', )
+      this.showTemplate = true;
+
+      
+      // this.saveTaskListItem({
+      //   boardId: this.$route.params.id,
+      //   listId:this.list.id,
+      //   item:{id:5},
+      //   name:"hello"}
+      // )
     },
     itemEditing() {
       this.isEditing = true;
