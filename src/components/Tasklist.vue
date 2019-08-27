@@ -21,7 +21,7 @@
         </ul>
       </div>
       <div class="board-footer">
-        <a href="#" class="add-task-btn" @click="createNewTask(0)">
+        <a class="add-task-btn" @click="createNewTask(0)">
           Add task
           <span>+</span>
         </a>
@@ -82,8 +82,18 @@ export default {
   },
   methods: {
     ...mapActions({
-      reorderTaskListItems: "reorderTaskListItems"
+      reorderTaskListItems: "reorderTaskListItems",
+      saveTaskListItem: "saveTaskListItem"
     }),
+    createNewTask(){
+      console.log('list ', this.list)
+      this.saveTaskListItem({
+        boardId: this.$route.params.id,
+        listId:this.list.id,
+        item:{id:5},
+        name:"hello"}
+      )
+    },
     itemEditing() {
       this.isEditing = true;
     },

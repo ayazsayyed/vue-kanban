@@ -11,6 +11,7 @@ export default {
     })
   },
   async saveTaskBoard({ commit }, payload) {
+    console.log('payload saveTaskBoard', payload);
     commit("SAVE_TASKBOARD", payload)
   },
   async archiveTaskBoard({ commit }, payload) {
@@ -24,6 +25,7 @@ export default {
   },
 
   async saveTaskList({ commit }, payload) {
+    console.log('payload saveTaskList', payload);
     commit("SAVE_TASKLIST", payload)
   },
   async archiveTaskList({ commit }, payload) {

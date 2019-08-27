@@ -97,10 +97,8 @@ export default {
       });
     },
     createNewList() {
-      console.log('hello');
-      
       this.newBoard.id = this.saveTaskList({
-        boardId: this.newBoard.id,
+        boardId: this.$route.params.id,
         name: this.newBoard.name,
       });
     },
