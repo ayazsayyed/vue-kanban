@@ -21,7 +21,7 @@
                   <div class="board-info">
                     <p
                       class="card-text"
-                    >Lists : {{board.lists.length}} | Items : {{totalItems(board.lists)}}</p>
+                    >Lists : 0 | Items : 0</p>
                   </div>
                   <div class="date">
                     <p class="text-muted">22 July 2019</p>
@@ -50,9 +50,12 @@
 import { mapGetters, mapActions } from "vuex";
 import { Bus } from "./../utils/bus";
 import Navbar from "./Navbar";
-import { db } from './../utils/db';
 
-const users = db.ref('vue-asana')
+
+
+
+
+
 export default {
   components: {
     Navbar
@@ -62,14 +65,9 @@ export default {
       documents: [],
     }
   },
-  firebase: {
-    
-    documents: db.ref('vue-asana'),
-    
-
-  },
+  
   mounted(){
-    console.log('documents ', db.ref('vue-asana'));
+    
     
   },
   computed: {
@@ -85,9 +83,13 @@ export default {
       restoreTaskBoard: "restoreTaskBoard"
     }),
     totalItems(lists) {
+      
+      
       let count = 0;
       lists.forEach(element => {
-        count += element.items.length;
+        console.log(element);
+        if(element.items)
+          count += element.items.length;
       });
       return count;
     },
@@ -102,6 +104,7 @@ export default {
     await this.setActiveTaskBoard({
       board: null
     });
+    
   }
 };
 </script>

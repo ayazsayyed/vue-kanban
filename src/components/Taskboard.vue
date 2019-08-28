@@ -91,9 +91,7 @@ export default {
     },
     lists: {
       get() {
-        return this.getBoard
-          ? this.getBoard.lists.filter(l => !l.archived)
-          : [];
+        return this.getBoard ? ( this.getBoard.lists ? this.getBoard.lists.filter(l => !l.archived ) : []): [];
       },
       async set(value) {
         await this.reorderTaskLists({

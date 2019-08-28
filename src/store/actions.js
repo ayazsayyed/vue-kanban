@@ -5,13 +5,12 @@ import { db } from './../utils/db'
 
 
 export default {
-  // firebase: {
-  //   // users: usersRef
-  // },
-  async fetchData({ commit }) {
+ 
+  async fetchData({ commit }, payload) {
+    // console.log('projects ', projects )
     commit("SET_LOADING_STATE", true)
     return axios.get(INITIAL_DATA_URL).then(res => {
-      commit("SET_INITIAL_DATA", res.data)
+      commit("SET_INITIAL_DATA", payload)
       commit("SET_LOADING_STATE", false)
     })
   },

@@ -6,6 +6,7 @@
       </div>
       <div class="task-item-body">
         <!-- <p class="task-title">{{text}}</p> -->
+        <label for="">Task name:</label>
         <input type="text" class="form-control" ref="taskTitle" v-model="taskName" @blur="saveItem" />
       </div>
       <div class="task-item-footer">

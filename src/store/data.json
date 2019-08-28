@@ -1,4 +1,6 @@
-[{
+{
+  "projetcs":[
+  {
     "id": "d033c156-5972-4767-ceb0-8a91a5c282db",
     "name": "Website Development",
     "description": "website for multiple clients",
@@ -378,7 +380,27 @@
         "name": "Done",
         "headerColor": "#607d8b",
         "archived": false,
-        "items": []
+        "items": [{
+          "id": "b536e41b-9039-2beb-d076-0fb1e6314422",
+          "text": "Identify success criteria",
+          "priority": "High",
+          "assignedUsers": [{
+              "name": "Ayaz Sayyed",
+              "id": "01234",
+              "imgURL": "https://lh3.googleusercontent.com/-bgFoHk_lLYY/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rf2LrPUhb82RyJfhwKvr36tZ81NBg.CMID/s32-c/photo.jpg"
+            },
+            {
+              "name": "Chang Yu",
+              "id": "01235",
+              "imgURL": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRj7x9Eh_d0nx-xnGCUBhcpL2_gs-_pRZAADsPDJCltX49ySU5xxA"
+            },
+            {
+              "name": "Michael S",
+              "id": "01236",
+              "imgURL": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcfFZCBzWumfdKses7xLH669oYa6hVdNUM5WITqwPhw-wl8-EJRA"
+            }
+          ]
+        }]
       }
     ]
   },
@@ -671,13 +693,13 @@
         "headerColor": "#607d8b",
         "archived": false,
         "items": [{
-            "id": "3264c290-25ae-5456-f5fc-dd471e639252",
+            "id": "3264c290-25ae-5456-f5fc-dd471e639212",
             "text": "Build the demo app",
             "priority": "Low",
             "assignedUsers": []
           },
           {
-            "id": "799a225d-c916-a40d-75b4-be6893eb508d",
+            "id": "799a225d-c916-a40d-75b4-be6893eb5012",
             "text": "Put in some sample data in app",
             "priority": "Medium",
             "assignedUsers": [{
@@ -687,7 +709,7 @@
             }]
           },
           {
-            "id": "0b07ac5b-4cfc-0890-e835-ba5e67deb4c8",
+            "id": "0b07ac5b-4cfc-0890-e835-ba5e67deb412",
             "text": "Test the app before launching",
             "priority": "High",
             "assignedUsers": [{
@@ -699,12 +721,40 @@
         ]
       },
       {
-        "id": "4859408a-3843-eee0-43a3-692938c40d91",
+        "id": "4859408a-3843-eee0-43a3-692938c40d32",
         "name": "Done",
         "headerColor": "#607d8b",
         "archived": false,
-        "items": []
+        "items": [{
+          "id": "3264c290-25ae-5456-f5fc-dd471e6322",
+          "text": "Build the demo app",
+          "priority": "Low",
+          "assignedUsers": []
+        },
+        {
+          "id": "799a225d-c916-a40d-75b4-be6893eb5011",
+          "text": "Put in some sample data in app",
+          "priority": "Medium",
+          "assignedUsers": [{
+            "name": "Ayaz Sayyed",
+            "id": "01234",
+            "imgURL": "https://lh3.googleusercontent.com/-bgFoHk_lLYY/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rf2LrPUhb82RyJfhwKvr36tZ81NBg.CMID/s32-c/photo.jpg"
+          }]
+        },
+        {
+          "id": "0b07ac5b-4cfc-0890-e835-ba5e67deb1",
+          "text": "Test the app before launching",
+          "priority": "High",
+          "assignedUsers": [{
+            "name": "Michael S",
+            "id": "01236",
+            "imgURL": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcfFZCBzWumfdKses7xLH669oYa6hVdNUM5WITqwPhw-wl8-EJRA"
+          }]
+        }
+      ]
       }
     ]
   }
-]
+  ]
+}
+

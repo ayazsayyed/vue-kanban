@@ -2,6 +2,7 @@ import Vue from "vue"
 const uuidv1 = require('uuid/v1');
 import {Bus} from './../utils/bus';
 import moment from "moment";
+import { db } from './../utils/db'
 
 // Lib to create guid
 const s4 = () =>
@@ -13,6 +14,7 @@ const guid = () => s4() + s4() + "-" + s4() + "-" + s4() + "-" + s4() + "-" + s4
 export default {
   // Set Initial Data
   SET_INITIAL_DATA(state, payload) {
+    console.log('payload ', payload )
     state.boards = payload
   },
 
@@ -43,7 +45,8 @@ export default {
         archived: false,
         lists: []
       }
-      state.boards.push(board)
+      // state.boards.push(board)
+      db.ref('projetcs').push(board)
       Bus.$emit('closePopup')
     }
   },
@@ -69,8 +72,13 @@ export default {
     const board = state.boards.find(b => b.id == payload.boardId);
     console.log('board ', board);
     // const list = board.lists.find(l => l.id == payload.listId)
-    const listIdx = board.lists.findIndex(l => l.id == payload.boardId)
-
+    let listIdx 
+    if(board.lists){
+      listIdx = board.lists.findIndex(l => l.id == payload.boardId)
+    }else{
+      board.lists = [];
+      listIdx = board.lists.findIndex(l => l.id == payload.boardId)
+    }
     // For existing item
     if (listIdx > -1) {
       list.name = payload.name

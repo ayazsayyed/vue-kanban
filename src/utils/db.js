@@ -1,17 +1,19 @@
 // Setup Firebase
-var config = {
-    apiKey: "AIzaSyAi_yuJciPXLFr_PYPeU3eTvtXf8jbJ8zw",
-    authDomain: "vue-demo-537e6.firebaseapp.com",
-    databaseURL: "https://vue-demo-537e6.firebaseio.com"
-  }
-  import Vue from 'vue'
 
-  import firebase from 'firebase'
-import { rtdbPlugin } from 'vuefire'
+import Vue from 'vue'
 
-Vue.use(rtdbPlugin)
+import Firebase from 'firebase'
+import {
+  rtdbPlugin as VueFire
+} from 'vuefire'
+
+Vue.use(VueFire)
 
 
-export const db = firebase
-  .initializeApp(config)
+
+
+export const db = Firebase
+  .initializeApp({
+    databaseURL: 'https://vue-asana.firebaseio.com'
+  })
   .database()
