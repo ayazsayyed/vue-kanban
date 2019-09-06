@@ -1,6 +1,9 @@
 # vue-kanban
 
-> A Vue.js project
+## Kanban board Application built with [#Vue.js](https://github.com/vuejs/vue)
+
+![alt text](https://raw.githubusercontent.com/ayazsayyed/vue-kanban/Kanban-UI.png)
+
 
 ## Build Setup
 
