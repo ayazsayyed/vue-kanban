@@ -1,6 +1,16 @@
 # vue-kanban
 
 ## Kanban board Application built with [#Vue.js](https://github.com/vuejs/vue)
+> Some of the features
+
+* Create project / board
+* Create lists in board 
+* Create items / tasks in list
+* Set task priority
+* Drag from one list to another
+* Add / Edit board name and description
+* Assign task to user 
+
 
 ![alt text](https://raw.githubusercontent.com/ayazsayyed/vue-kanban/master/Kanban-UI.png)
 
