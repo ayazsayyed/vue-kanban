@@ -2,7 +2,7 @@
 
 ## Kanban board Application built with [#Vue.js](https://github.com/vuejs/vue)
 
-![alt text](https://raw.githubusercontent.com/ayazsayyed/vue-kanban/Kanban-UI.png)
+![alt text](https://raw.githubusercontent.com/ayazsayyed/vue-kanban/master/Kanban-UI.png)
 
 
 ## Build Setup
