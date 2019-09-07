@@ -2,7 +2,8 @@
   <div>
     <li class="task-item">
       <div class="task-item-header">
-        <div class="task-priority" :class="item.priority">{{item.priority}} Priority</div>
+        <div class="task-priority" :class="item.priority" v-if="showTaskPriority" @click="changePriority">{{item.priority}} Priority</div>
+        <v-select v-model="item.priority" :options="['Low','Medium', 'High']" v-if="showTaskPriorityDropdown" @input="setNewPriority" :blur="setNewPriority" :clearable=false></v-select>
       </div>
       <div class="task-item-body">
         <p class="task-title">{{this.item.text}}</p>
@@ -31,10 +32,34 @@
 <script>
 import store from "./../store/index";
 import { mapActions, mapGetters } from "vuex";
+import vSelect from 'vue-select';
+import 'vue-select/dist/vue-select.css';
 
 export default {
   name: "Taskitem",
   props: ["item", "list", "board"],
+  components:{
+    'v-select':vSelect
+  },
+  data(){
+    return{
+      showTaskPriorityDropdown:false,
+      showTaskPriority:true,
+    }
+  },
+  methods:{
+    changePriority(){
+      this.showTaskPriorityDropdown = !this.showTaskPriorityDropdown;
+      this.showTaskPriority = !this.showTaskPriority
+      console.log(this.$refs);
+      $('select').trigger('click');
+      // this.$refs.select.focus().click();
+    },
+    setNewPriority(){
+      this.showTaskPriorityDropdown = !this.showTaskPriorityDropdown;
+      this.showTaskPriority = !this.showTaskPriority
+    }
+  },
   created() {},
   computed: {}
 };

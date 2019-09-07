@@ -34,6 +34,10 @@ export default {
       board.name = payload.name
       board.description = payload.description
       Vue.set(state.boards, itemIdx, board)
+      console.log('this.$firebaseRefs ', this.$firebaseRefs)
+      // this.$firebaseRefs.user.update({ lastName: newLastName }).then(() => {
+      //   console.log('this.$firebaseRefs ', this.$firebaseRefs)
+      // })
     }
     // For new item
     else {
