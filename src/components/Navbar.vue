@@ -25,6 +25,22 @@
             <li class="nav-item">
               <a class="nav-link" href="#">Profile</a>
             </li>
+            <li class="nav-item add-board-link">
+              <div class="dropdown">
+              <button class="btn btn-icon btn-3 btn-secondary" type="button" data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false">
+                
+
+                <span class="btn-inner--text">New </span>
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item"  href="#" v-if="buttonType == 'dashboard'" @click="addNewBoard" >New Board</a>
+              <a class="dropdown-item" href="#" v-if="buttonType == 'taskboard'" @click="addNewList">New List</a>
+              <a class="dropdown-item" href="#" @click="openTeamPopoup">Team</a>
+            </div>
+              </div>
+            </li>
             <li class="nav-item add-board-link" v-if="buttonType == 'dashboard'" >
               <button class="btn btn-icon btn-3 btn-secondary" type="button" @click="addNewBoard">
                 <span class="btn-inner--icon">
@@ -48,16 +64,19 @@
       </div>
     </nav>
     <NewBoardPopup />
+    <TeamPopup />
   </div>
 </template>
 
 <script>
 import { Bus } from "./../utils/bus";
 import NewBoardPopup from "./popups/NewBoardPopup";
+import TeamPopup from "./popups/TeamPopup";
 export default {
   name: "Navbar",
   components: {
-    NewBoardPopup
+    NewBoardPopup,
+    TeamPopup
   },
   props:['buttonType', 'currentBoard'],
   mounted(){
@@ -79,6 +98,10 @@ export default {
     addNewList(e) {
       e.preventDefault();
       Bus.$emit("open-new-popup", "list");
+    },
+    openTeamPopoup(e){
+      e.preventDefault();
+      Bus.$emit("open-team-popup", "list");
     }
   }
 };

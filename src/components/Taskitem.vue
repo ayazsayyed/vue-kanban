@@ -2,8 +2,20 @@
   <div>
     <li class="task-item">
       <div class="task-item-header">
-        <div class="task-priority" :class="item.priority" v-if="showTaskPriority" @click="changePriority">{{item.priority}} Priority</div>
-        <v-select v-model="item.priority" :options="['Low','Medium', 'High']" v-if="showTaskPriorityDropdown" @input="setNewPriority" :blur="setNewPriority" :clearable=false></v-select>
+        <div
+          class="task-priority"
+          :class="item.priority"
+          v-if="showTaskPriority"
+          @click="changePriority"
+        >{{item.priority}} Priority</div>
+        <v-select
+          v-model="item.priority"
+          :options="['Low','Medium', 'High']"
+          v-if="showTaskPriorityDropdown"
+          @input="setNewPriority"
+          :blur="setNewPriority"
+          :clearable="false"
+        ></v-select>
       </div>
       <div class="task-item-body">
         <p class="task-title">{{this.item.text}}</p>
@@ -22,7 +34,22 @@
           <div class="user-avatar" v-for="(user, id) in item.assignedUsers" :key="id">
             <img :src="user.imgURL" alt />
           </div>
-          <div class="add-icon">+</div>
+          <div class="dropdown">
+            <div
+              class="add-icon"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >+</div>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#" v-for="(user, id) in item.assignedUsers" :key="id">
+               <div class="user-avatar">
+                  <img :src="user.imgURL" alt />
+                </div>
+                {{user.name}}
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </li>
@@ -32,35 +59,38 @@
 <script>
 import store from "./../store/index";
 import { mapActions, mapGetters } from "vuex";
-import vSelect from 'vue-select';
-import 'vue-select/dist/vue-select.css';
+import vSelect from "vue-select";
+import { Bus } from "./../utils/bus";
+import "vue-select/dist/vue-select.css";
 
 export default {
   name: "Taskitem",
   props: ["item", "list", "board"],
-  components:{
-    'v-select':vSelect
+  components: {
+    "v-select": vSelect
   },
-  data(){
-    return{
-      showTaskPriorityDropdown:false,
-      showTaskPriority:true,
-    }
+  data() {
+    return {
+      showTaskPriorityDropdown: false,
+      showTaskPriority: true
+    };
   },
-  methods:{
-    changePriority(){
+  methods: {
+    changePriority() {
+      console.log("changePriority");
       this.showTaskPriorityDropdown = !this.showTaskPriorityDropdown;
-      this.showTaskPriority = !this.showTaskPriority
-      console.log(this.$refs);
-      $('select').trigger('click');
-      // this.$refs.select.focus().click();
+      this.showTaskPriority = !this.showTaskPriority;
     },
-    setNewPriority(){
+    setNewPriority(e) {
+      console.log("setNewPriority e", e);
+      // this.$emit("input", val);
       this.showTaskPriorityDropdown = !this.showTaskPriorityDropdown;
-      this.showTaskPriority = !this.showTaskPriority
+      this.showTaskPriority = !this.showTaskPriority;
     }
   },
-  created() {},
+  created() {
+    Bus.$on("search:blur", "hello world");
+  },
   computed: {}
 };
 </script>
