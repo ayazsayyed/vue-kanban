@@ -18,7 +18,7 @@
         ></v-select>
       </div>
       <div class="task-item-body">
-        <p class="task-title">{{this.item.text}}</p>
+        <p class="task-title" @click="openTaskDetailPopoup(item)">{{this.item.text}}</p>
         <!-- <textarea type="text" class="form-control task-title" :value="task.title" rows="2"></textarea> -->
       </div>
       <div class="task-item-footer">
@@ -53,6 +53,7 @@
         </div>
       </div>
     </li>
+    
   </div>
 </template>
 
@@ -62,12 +63,14 @@ import { mapActions, mapGetters } from "vuex";
 import vSelect from "vue-select";
 import { Bus } from "./../utils/bus";
 import "vue-select/dist/vue-select.css";
+import TaskDetailPopup from './popups/TaskDetailPopup'
 
 export default {
   name: "Taskitem",
   props: ["item", "list", "board"],
   components: {
-    "v-select": vSelect
+    "v-select": vSelect,
+    TaskDetailPopup
   },
   data() {
     return {
@@ -86,6 +89,11 @@ export default {
       // this.$emit("input", val);
       this.showTaskPriorityDropdown = !this.showTaskPriorityDropdown;
       this.showTaskPriority = !this.showTaskPriority;
+    },
+    openTaskDetailPopoup(item){
+      console.log('clicked')
+      
+      Bus.$emit("open-task-detail-popup", item);
     }
   },
   created() {

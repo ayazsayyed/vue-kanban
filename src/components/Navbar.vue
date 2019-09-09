@@ -41,24 +41,6 @@
             </div>
               </div>
             </li>
-            <li class="nav-item add-board-link" v-if="buttonType == 'dashboard'" >
-              <button class="btn btn-icon btn-3 btn-secondary" type="button" @click="addNewBoard">
-                <span class="btn-inner--icon">
-                  <i class="fa fa-plus" aria-hidden="true"></i>
-                </span>
-
-                <span class="btn-inner--text">New Board</span>
-              </button>
-            </li>
-            <li class="nav-item add-board-link" v-if="buttonType == 'taskboard'" >
-              <button class="btn btn-icon btn-3 btn-secondary" type="button" @click="addNewList">
-                <span class="btn-inner--icon">
-                  <i class="fa fa-plus" aria-hidden="true"></i>
-                </span>
-
-                <span class="btn-inner--text">New List</span>
-              </button>
-            </li>
           </ul>
         </div>
       </div>

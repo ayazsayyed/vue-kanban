@@ -4,7 +4,7 @@
     <div class="container-fluid main-container">
       <div class="row equal">
         <div
-          class="col-xs-12 col-sm-6 col-md-4 d-flex pb-3"
+          class="col-xs-12 col-sm-6 col-md-4 col-xl-3 d-flex pb-3"
           v-for="board in unarchivedBoards"
           :key="board.id"
         >
