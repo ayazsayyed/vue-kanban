@@ -1,9 +1,19 @@
 <template>
   <div>
     <div class="task-board" :data-board-name="list.name">
+      <input type="text" class="form-control" :value="this.list.name"  v-if="isEditing"  @blur="saveTaskListName">
       <div class="board-header">
-        <p class="board-name">{{ list.name }}</p>
-        <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+        <p class="board-name" v-if="!isEditing">{{ list.name }}</p>
+        
+        <div class="dropdown" v-if="!isEditing">
+          <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-ellipsis-v options" aria-hidden="true"></i>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#" @click.prevent="isEditing = !isEditing">Rename</a>
+            <a class="dropdown-item" href="#"  @click.prevent="deleteWholeTaskList">Delete</a>
+          </div>
+        </div>
       </div>
       <div class="board-content">
         <ul class="task-list">
@@ -16,7 +26,6 @@
                 :board="board"
                 :key="item.id"
               />
-              
             </transition-group>
           </draggable>
           <taskItemTemplate v-if="showTemplate" :list="list" />
@@ -47,13 +56,14 @@ export default {
   props: ["board", "list"],
   data() {
     return {
-      isEditing: false,
       drag: false,
-      showTemplate:false
+      showTemplate: false,
+      isEditing: false,
+      taskListName:this.list.name
     };
   },
   created() {
-     Bus.$on('remove-template', this.removeTemplate )
+    Bus.$on("remove-template", this.removeTemplate);
   },
   computed: {
     defaultItem() {
@@ -90,17 +100,30 @@ export default {
   methods: {
     ...mapActions({
       reorderTaskListItems: "reorderTaskListItems",
-      saveTaskListItem: "saveTaskListItem"
+      saveTaskListItem: "saveTaskListItem",
+      deleteTaskList:"deleteTaskList"
     }),
-    removeTemplate(data){
-      console.log('remove template ', data)
+    saveTaskListName(e){
+     this.list.name = e.target.value  
+      console.log('this.list.name', this.list.name);
+      this.isEditing = !this.isEditing
+    },
+    deleteWholeTaskList(){
+      console.log(this.list);
+      const payload = {
+          boardId: this.board.id,
+          listId: this.list.id
+        };
+      this.deleteTaskList(payload)
+    },
+    removeTemplate(data) {
+      console.log("remove template ", data);
       this.showTemplate = false;
     },
-    createNewTask(){
+    createNewTask() {
       // console.log('list ', )
       this.showTemplate = true;
 
-      
       // this.saveTaskListItem({
       //   boardId: this.$route.params.id,
       //   listId:this.list.id,
@@ -121,7 +144,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .sortable-chosen.ghost .task-item {
   background: repeating-linear-gradient(
     145deg,
@@ -147,5 +170,15 @@ export default {
 }
 .list-group-item i {
   cursor: pointer;
+}
+.task-board {
+  .board-header {
+    .options {
+      padding: 5px 5px;
+    }
+    .dropdown-menu {
+      min-width: 10rem;
+    }
+  }
 }
 </style>

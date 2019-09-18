@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div style="height:100%">
     <Navbar buttonType="taskboard"  />
-    <div class="container-fluid main-container">
+    <div class="container-fluid main-container scrollable-div">
       <div class="board-wrapper">
         <div class="board-details">
           <div class="project-name mb-2">
@@ -13,7 +13,7 @@
         </div>
         <draggable
           v-model="lists"
-          class="row flex-nowrap mt-1 scrollable-div"
+          class="row flex-nowrap mt-1"
           v-bind="getDragOptions"
         >
           <TaskList
