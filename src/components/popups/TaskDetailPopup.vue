@@ -3,20 +3,21 @@
     <!-- Modal -->
     <div
       class="modal fade"
-      id="teamPopup"
+      id="TaskDetailPopup"
       tabindex="-1"
       role="dialog"
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog modal-dialog-centered modal-dialog-zoom" role="document">
-        <div class="modal-content">
+      <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-zoom" role="document">
+        <div class="modal-content" v-if="isLoading">...</div>
+        <div class="modal-content" v-else>
           
             <div class="modal-header">
               <h5
                 class="modal-title"
                 id="exampleModalLabel"
-              >Team Setting </h5>
+              >Task Details </h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -24,6 +25,7 @@
             <div class="modal-body">
               <div class="row">
                 <div class="col-md-12">
+                  <h3>{{item.text}}</h3>
                   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam voluptatum rem, assumenda dolorum ratione facilis facere delectus ullam quae, harum molestias praesentium et alias, numquam deserunt ab nulla soluta eius.</p>
                 </div>
               </div>
@@ -41,30 +43,29 @@
 import { Bus } from "./../../utils/bus";
 import { mapActions } from "vuex";
 export default {
-  name: "TeamPopup",
+  name: "TaskDetailPopup",
   data() {
     return {
-      newBoard: {
-        name: "",
-        description: "",
-        id: ""
-      },
-      formType: ""
+      isLoading:true,
+      item:null
     };
   },
   created() {
-    Bus.$on("open-team-popup", this.showTeamPopup);
+    Bus.$on("open-task-detail-popup", this.showTaskDetailPopupPopup);
     Bus.$on("closePopup", this.closePopup);
   },
   methods: {
    
-    showTeamPopup() {
-      console.log("type ");
-      $("#teamPopup").modal("show");
+    showTaskDetailPopupPopup(item) {
+      this.item = item;
+      this.isLoading = false
+      $("#TaskDetailPopup").modal("show");
     },
     
     closePopup() {
-      $("#teamPopup").modal("hide");
+      this.item = null;
+      this.isLoading = true
+      $("#taskDetailPopup").modal("hide");
     }
   }
 };

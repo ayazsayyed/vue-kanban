@@ -13,7 +13,7 @@
         </div>
         <draggable
           v-model="lists"
-          class="row flex-nowrap mt-1"
+          class="row flex-nowrap"
           v-bind="getDragOptions"
         >
           <TaskList
@@ -25,6 +25,7 @@
         </draggable>
       </div>
     </div>
+    <TaskDetailPopup />
   </div>
 </template>
 
@@ -35,6 +36,7 @@ import TaskList from "./Tasklist";
 import store from "./../store/index";
 import draggable from "vuedraggable";
 import { mapActions, mapGetters } from "vuex";
+import TaskDetailPopup from './popups/TaskDetailPopup'
 
 export default {
   name: "Taskboard",
@@ -43,7 +45,8 @@ export default {
     Taskitem,
     TaskList,
     draggable,
-    Navbar
+    Navbar,
+    TaskDetailPopup
   },
   data() {
     return {
