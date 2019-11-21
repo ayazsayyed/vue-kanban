@@ -14,7 +14,7 @@ ul, li {
 }
 
 .main-container {
-    padding: 30px;
+    padding: 100px 30px 30px 30px;
     padding-bottom: 0;
     background: #eef2f9;
     height: 100%;
@@ -209,7 +209,6 @@ ul, li {
 }
 .scrollable-div{
     overflow-x: scroll;
-    overflow-y: hidden;
 }
 .card-text{
     color: #525f7f;
