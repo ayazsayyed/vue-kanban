@@ -51,5 +51,8 @@ export default {
   },
   async deleteTaskListItem({ commit }, payload) {
     commit("DELETE_TASKLIST_ITEM", payload)
+  },
+  async deleteTaskList({ commit }, payload) {
+    commit("DELETE_TASKLIST", payload)
   }
 }

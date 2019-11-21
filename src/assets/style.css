@@ -1,6 +1,9 @@
 html, body {
     height: 100%;
 }
+a{
+    cursor: pointer;
+}
 #app, .main-wrapper{
     height: 100%
 }
@@ -17,7 +20,7 @@ ul, li {
     padding: 100px 30px 30px 30px;
     padding-bottom: 0;
     background: #eef2f9;
-    height: 100%;
+    min-height: 100%;
 }
 
 

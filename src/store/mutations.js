@@ -166,5 +166,19 @@ export default {
     if (itemIdx > -1) {
       Vue.delete(list.items, itemIdx)
     }
+  },
+  // Delete Task List
+  DELETE_TASKLIST(state, payload) {
+    console.log(payload);
+    
+    const board = state.boards.find(b => b.id == payload.boardId)
+    const list = board.lists.find(l => l.id == payload.listId)
+    console.log('lists ', list);
+    
+     const itemIdx = board.lists.findIndex(item => item.id == payload.listId)
+    // For existing item
+    if (itemIdx > -1) {
+      Vue.delete(board.lists, itemIdx)
+    }
   }
 }
