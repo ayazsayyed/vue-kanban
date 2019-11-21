@@ -10,11 +10,12 @@
         >{{item.priority}} Priority</div>
         <v-select
           v-model="item.priority"
+          ref="vueDropdown"
           :options="['Low','Medium', 'High']"
           v-if="showTaskPriorityDropdown"
-          @input="setNewPriority"
-          :blur="setNewPriority"
+          @search:blur="setNewPriority"
           :clearable="false"
+          :closeOnSelect="true"
         ></v-select>
       </div>
       <div class="task-item-body">
@@ -43,7 +44,7 @@
             >+</div>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <a class="dropdown-item" href="#" v-for="(user, id) in item.assignedUsers" :key="id">
-               <div class="user-avatar">
+                <div class="user-avatar">
                   <img :src="user.imgURL" alt />
                 </div>
                 {{user.name}}
@@ -53,7 +54,6 @@
         </div>
       </div>
     </li>
-    
   </div>
 </template>
 
@@ -63,7 +63,7 @@ import { mapActions, mapGetters } from "vuex";
 import vSelect from "vue-select";
 import { Bus } from "./../utils/bus";
 import "vue-select/dist/vue-select.css";
-import TaskDetailPopup from './popups/TaskDetailPopup'
+import TaskDetailPopup from "./popups/TaskDetailPopup";
 
 export default {
   name: "Taskitem",
@@ -78,27 +78,27 @@ export default {
       showTaskPriority: true
     };
   },
+  watch: {},
   methods: {
     changePriority() {
-      console.log("changePriority");
       this.showTaskPriorityDropdown = !this.showTaskPriorityDropdown;
       this.showTaskPriority = !this.showTaskPriority;
+      this.$nextTick(() => {
+        const input = this.$refs.vueDropdown.$el.querySelector("input");
+        input.focus();
+      });
     },
     setNewPriority(e) {
-      console.log("setNewPriority e", e);
-      // this.$emit("input", val);
       this.showTaskPriorityDropdown = !this.showTaskPriorityDropdown;
       this.showTaskPriority = !this.showTaskPriority;
     },
-    openTaskDetailPopoup(item){
-      console.log('clicked')
-      
+    openTaskDetailPopoup(item) {
+      console.log("clicked");
+
       Bus.$emit("open-task-detail-popup", item);
     }
   },
-  created() {
-    Bus.$on("search:blur", "hello world");
-  },
+  created() {},
   computed: {}
 };
 </script>
