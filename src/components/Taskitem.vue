@@ -16,6 +16,7 @@
           @search:blur="setNewPriority"
           :clearable="false"
           :closeOnSelect="true"
+          class="custom-v-select"
         ></v-select>
       </div>
       <div class="task-item-body">
@@ -42,12 +43,12 @@
               aria-haspopup="true"
               aria-expanded="false"
             >+</div>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#" v-for="(user, id) in item.assignedUsers" :key="id">
+            <div class="dropdown-menu assignee-selection" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" @click="assignUser(user)" v-for="(user, id) in item.assignedUsers" :key="id">
                 <div class="user-avatar">
                   <img :src="user.imgURL" alt />
                 </div>
-                {{user.name}}
+                <p class="user-name">{{user.name}}</p>
               </a>
             </div>
           </div>
@@ -80,6 +81,11 @@ export default {
   },
   watch: {},
   methods: {
+    assignUser(user){
+      this.item.assignedUsers.push(user)
+      console.log(this.item);
+      
+    },
     changePriority() {
       this.showTaskPriorityDropdown = !this.showTaskPriorityDropdown;
       this.showTaskPriority = !this.showTaskPriority;
@@ -112,5 +118,22 @@ export default {
 .assigned-users .add-icon {
   margin-left: 20px;
   cursor: pointer;
+}
+.custom-v-select {
+  font-size: 14px;
+}
+.assignee-selection .dropdown-item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0.4rem .8rem;
+  .user-avatar {
+    margin-right: 15px;
+  }
+  .user-name {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgb(45, 45, 82);
+  }
 }
 </style>
